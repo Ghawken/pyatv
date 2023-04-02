@@ -5,7 +5,7 @@ from enum import Enum
 
 MAJOR_VERSION = "0"
 MINOR_VERSION = "10"
-PATCH_VERSION = "4"
+PATCH_VERSION = "5"
 __short_version__ = f"{MAJOR_VERSION}.{MINOR_VERSION}"
 __version__ = f"{__short_version__}.{PATCH_VERSION}"
 
@@ -169,6 +169,12 @@ class DeviceModel(Enum):
 
     Music = 10
     """Music app (or iTunes) running on a desktop computer."""
+
+    HomePod2 = 11
+    """Device model is HomePod (2nd Generation 2023)."""
+
+    AppleTV4KGen3 = 12
+    """Device model is seventh generation Apple TV (Apple TV 4K gen 3)."""
 
 
 class InputAction(Enum):

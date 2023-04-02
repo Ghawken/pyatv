@@ -875,7 +875,7 @@ class DeviceInfo:
 
         if self.model in [DeviceModel.AirPortExpress, DeviceModel.AirPortExpressGen2]:
             return OperatingSystem.AirPortOS
-        if self.model in [DeviceModel.HomePod, DeviceModel.HomePodMini]:
+        if self.model in [DeviceModel.HomePod, DeviceModel.HomePod2, DeviceModel.HomePodMini]:
             return OperatingSystem.TvOS
         if self.model in [
             DeviceModel.Gen2,
@@ -883,6 +883,7 @@ class DeviceInfo:
             DeviceModel.Gen4,
             DeviceModel.Gen4K,
             DeviceModel.AppleTV4KGen2,
+            DeviceModel.AppleTV4KGen3
         ]:
             return OperatingSystem.TvOS
 

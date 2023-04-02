@@ -14,9 +14,11 @@ _MODEL_LIST: Dict[str, DeviceModel] = {
     "AppleTV5,3": DeviceModel.Gen4,
     "AppleTV6,2": DeviceModel.Gen4K,
     "AppleTV11,1": DeviceModel.AppleTV4KGen2,
+    "AppleTV14,1": DeviceModel.AppleTV4KGen3,
     "AudioAccessory1,1": DeviceModel.HomePod,
     "AudioAccessory1,2": DeviceModel.HomePod,
     "AudioAccessory5,1": DeviceModel.HomePodMini,
+    "AudioAccessory6,1": DeviceModel.HomePod2
 }
 
 
@@ -27,6 +29,8 @@ _INTERNAL_NAME_LIST: Dict[str, DeviceModel] = {
     "J42dAP": DeviceModel.Gen4,
     "J105aAP": DeviceModel.Gen4K,
     "J305AP": DeviceModel.AppleTV4KGen2,
+    "J33AP": DeviceModel.AppleTV4KGen3
+
 }
 
 # Incomplete list here! Only Apple TV version numbers for now.
