@@ -38,10 +38,18 @@ def _get_pairing_data(resp: HttpResponse, step: str = ""):
 class AirPlayHapPairSetupProcedure(PairSetupProcedure):
     """Authenticate a device for AirPlay playback."""
 
-    def __init__(self, http: HttpConnection, auth_handler: SRPAuthHandler):
-        """Initialize a new DeviceAuthenticator."""
+    def __init__(
+        self,
+        http: HttpConnection,
+        auth_handler: SRPAuthHandler,
+        display_name: Optional[str] = None,
+    ):
+        """Initialize HAP pairing with an optional receiver-visible name."""
         self.http = http
         self.srp = auth_handler
+        self._headers = copy(_AIRPLAY_HEADERS)
+        if display_name:
+            self._headers["X-Apple-Client-Name"] = display_name
         self._atv_salt = None
         self._atv_pub_key = None
 
@@ -52,11 +60,11 @@ class AirPlayHapPairSetupProcedure(PairSetupProcedure):
         """
         self.srp.initialize()
 
-        await self.http.post("/pair-pin-start", headers=_AIRPLAY_HEADERS)
+        await self.http.post("/pair-pin-start", headers=self._headers)
 
         data = {hap_tlv8.TlvValue.Method: b"\x00", hap_tlv8.TlvValue.SeqNo: b"\x01"}
         resp = await self.http.post(
-            "/pair-setup", body=hap_tlv8.write_tlv(data), headers=_AIRPLAY_HEADERS
+            "/pair-setup", body=hap_tlv8.write_tlv(data), headers=self._headers
         )
         pairing_data = _get_pairing_data(resp, "M2")
 
@@ -81,7 +89,7 @@ class AirPlayHapPairSetupProcedure(PairSetupProcedure):
             hap_tlv8.TlvValue.Proof: proof,
         }
         resp = await self.http.post(
-            "/pair-setup", body=hap_tlv8.write_tlv(data), headers=_AIRPLAY_HEADERS
+            "/pair-setup", body=hap_tlv8.write_tlv(data), headers=self._headers
         )
         _get_pairing_data(resp, "M4")
 
@@ -90,7 +98,7 @@ class AirPlayHapPairSetupProcedure(PairSetupProcedure):
             hap_tlv8.TlvValue.EncryptedData: self.srp.step3(name=display_name),
         }
         resp = await self.http.post(
-            "/pair-setup", body=hap_tlv8.write_tlv(data), headers=_AIRPLAY_HEADERS
+            "/pair-setup", body=hap_tlv8.write_tlv(data), headers=self._headers
         )
         pairing_data = _get_pairing_data(resp, "M6")
 
