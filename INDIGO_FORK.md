@@ -1,7 +1,7 @@
 # Ghawken/pyatv – `indigo` branch
 
 Upstream `postlund/pyatv` master (v0.18.0, last commit 2026-06-19) plus open upstream PRs
-used by the Indigo appleTV plugin. Version: `0.18.0.post1`.
+used by the Indigo appleTV plugin. Version: `0.18.0.post2`.
 
 | PR | Summary |
 |----|---------|
@@ -22,9 +22,10 @@ used by the Indigo appleTV plugin. Version: `0.18.0.post1`.
 | #2942 | airplay: zero-pad lower word when parsing features |
 | #2907 | typing fix for devices/device_uids |
 | #2909 | test fixtures for newer zeroconf |
+| #2949 | Add Apple TV 4K (4th generation) – AppleTV18,1 / J265AP |
 
 Conflicts resolved by hand: #2894 vs #2920 (`airplay/auth/hap.py`), #2931 vs #2926 (`core/mdns.py`, tests).
-Full test suite: 1316 passed, 6 skipped.
+Full test suite: 1325 passed, 6 skipped.
 
 Update: `git fetch upstream && git checkout indigo && git merge upstream/master`, re-run tests,
 bump `PATCH_VERSION` in `pyatv/const.py`.
